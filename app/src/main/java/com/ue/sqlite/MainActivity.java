@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.ue.sqlite.bean.InfoBean;
 import com.ue.sqlite.dao.InfoDao;
@@ -38,12 +39,12 @@ public class MainActivity extends Activity implements OnClickListener {
                 InfoBean bean = new InfoBean();//创建一条记录
                 bean.name = "张三";
                 bean.phone ="110";
-                infoDao.add(bean);
-
-                InfoBean bean1 = new InfoBean();
-                bean1.name = "李四";
-                bean1.phone ="120";
-                infoDao.add(bean1);
+                boolean result = infoDao.add(bean);
+                if(result){
+                    Toast.makeText(mContext, "添加成功", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(mContext, "添加失败", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.bt_del://删除一条记录
